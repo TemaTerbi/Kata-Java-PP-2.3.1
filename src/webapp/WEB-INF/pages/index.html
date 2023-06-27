@@ -31,9 +31,9 @@
                 </form>
             </td>
             <td>
-                <form th:action="@{/edit/{id}(id=${user.id})}" th:object="${user}">
-                    <button type="submit">Change</button>
-                </form>
+                <a th:href="@{'/edit?id=' + ${user.id}}" th:color="yellow">
+                    <span>Change</span>
+                </a>
             </td>
         </tr>
     </table>

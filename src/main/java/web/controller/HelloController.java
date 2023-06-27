@@ -13,11 +13,9 @@ import javax.transaction.Transactional;
 @Controller
 public class HelloController {
 
-	@Autowired
 	private UserServiceImpl userService;
 
-	@Autowired
-	public void setUserService(UserServiceImpl userService) {
+	public HelloController(UserServiceImpl userService) {
 		this.userService = userService;
 	}
 
@@ -28,33 +26,32 @@ public class HelloController {
 	}
 
 	@GetMapping(value = "/add")
-	public String addUserOpenPage(Model model) {
+	public String addUser(Model model) {
 		User user = new User();
 		model.addAttribute("user", user);
 		return "addUser";
 	}
 
 	@PostMapping(value = "/add")
-	public String addUserToDB(@ModelAttribute("user") User user) {
+	public String addUser(@ModelAttribute("user") User user) {
 		userService.addUser(user);
 		return "redirect:/";
 	}
 
 	@GetMapping("/delete")
-	public String deleteUserById(@RequestParam("id") Long id) {
+	public String deleteUser(@RequestParam("id") Long id) {
 		userService.deleteUser(id);
 		return "redirect:/";
 	}
 
-	@GetMapping(value = "/edit/{id}")
-	public String showEditPage(Model model, @PathVariable("id") long id) {
-		User user = userService.getUserById(id);
-		model.addAttribute("user", user);
+	@GetMapping(value = "/edit")
+	public String editUser(@RequestParam(value = "id") long id, Model model) {
+		model.addAttribute("user", userService.getUserById(id));
 		return "editUser";
 	}
 
 	@PostMapping(value = "/edit")
-	public String edit(@ModelAttribute("user") User user) {
+	public String editUser(@ModelAttribute("user") User user) {
 		userService.editUser(user);
 		return "redirect:/";
 	}

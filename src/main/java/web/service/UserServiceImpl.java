@@ -10,14 +10,11 @@ import web.models.User;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Component
+@Service
 public class UserServiceImpl implements UserService {
-
-    @Autowired
     private UserDao userDao;
 
-    @Autowired
-    public void setUserDao(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
 
