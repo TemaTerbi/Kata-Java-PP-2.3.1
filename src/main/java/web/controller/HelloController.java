@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web.models.User;
+import web.service.UserService;
 import web.service.UserServiceImpl;
 
 import javax.transaction.Transactional;
@@ -13,9 +14,9 @@ import javax.transaction.Transactional;
 @Controller
 public class HelloController {
 
-	private UserServiceImpl userService;
+	private UserService userService;
 
-	public HelloController(UserServiceImpl userService) {
+	public HelloController(UserService userService) {
 		this.userService = userService;
 	}
 
